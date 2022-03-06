@@ -2,6 +2,8 @@
 
 ATTN! Please add your own private.key and modify "ds-config.php" accordingly to your environment.
 
+See other "// AK" notes inside of the PHP files.
+
 <hr />
 
 # PHP Launcher Code Examples
