@@ -1,4 +1,4 @@
-# PHP Launcher Code Examples
+# AK notes
 
 ATTN! Please add your own private.key and modify "ds-config.php" accordingly to your environment.
 
