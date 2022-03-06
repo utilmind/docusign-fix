@@ -1,5 +1,11 @@
 # PHP Launcher Code Examples
 
+ATTN! Please add your own private.key and modify "ds-config.php" accordingly to your environment.
+
+<hr />
+
+# PHP Launcher Code Examples
+
 ### GitHub repo: [code-examples-php](./README.md)
 
 This GitHub repo includes code examples for the DocuSign Admin API, Click API, eSignature REST API, Monitor API, and Rooms API. To switch between API code examples, modify the `EXAMPLES_API_TYPE` setting in the ds_config.php file. Set only one API type to `true` and set the remaining to `false`.
