@@ -7,7 +7,7 @@
 namespace Example\Controllers\Examples\eSignature;
 
 use Example\Controllers\eSignBaseController;
-use Example\Services\Examples\eSignature\SigningViaEmailService;
+use Example\Services\Examples\eSignature\aktestService;
 
 class aktest extends eSignBaseController
 {
@@ -43,7 +43,7 @@ class aktest extends eSignBaseController
         # 2. Call the worker method
         # More data validation would be a good idea here
         # Strip anything other than characters listed
-        $envelopeResponse = SigningViaEmailService::signingViaEmail(
+        $envelopeResponse = aktestService::signingViaEmail(
             $this->args,
             $this->clientService,
             $this::DEMO_DOCS_PATH
@@ -79,6 +79,7 @@ class aktest extends eSignBaseController
             'cc_name' => $this->checkInputValues($_POST['cc_name']),
             'status' => $status
         ];
+
         return [
             'account_id' => $_SESSION['ds_account_id'],
             'base_path' => $_SESSION['ds_base_path'],

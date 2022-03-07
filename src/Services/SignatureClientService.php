@@ -293,8 +293,6 @@ class SignatureClientService
      */
     public function createDocumentForEnvelope(array $args): string
     {
-        return '';
-/*
         return <<< heredoc
     <!DOCTYPE html>
     <html>
@@ -319,6 +317,5 @@ color: darkblue;">Order Processing Division</h2>
         </body>
     </html>
 heredoc;
-*/
     }
 }

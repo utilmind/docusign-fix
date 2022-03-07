@@ -1,51 +1,72 @@
-{% extends "base.html" %}  {% block content %}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, shrink-to-fit=no" />
+<meta name="author" content="utilmind, 2022" />
+<meta name="description" itemprop="description" content="DocuSign demo" />
 
-<h4>2. Send an envelope with a remote (email) signer and cc recipient</h4>
-<p>The envelope includes a PDF, Word, and HTML document. Anchor text
-    (<a href="https://developers.docusign.com/docs/esign-rest-api/esign101/concepts/tabs/auto-place/">AutoPlace</a>)
-    is used to position the signing fields in the documents.
-</p>
-<p>This is a general example of creating and sending an envelope (a signing request) to multiple recipients,
-    with multiple documents, and with signature fields for the documents.</p>
+<link rel="image_src" href="i/icon/serp-icon.svg" />
+<!--
+<link rel="shortcut icon" type="image/svg+xml" href="i/icon/serp-icon.svg" />
+<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="i/icon/favicon.ico" />
+-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-{% if show_doc %}
-<p><a target='_blank' href='{{ documentation | raw }}'>Documentation</a> about this example.</p>
-{% endif %}
+<title>DocuSign demo</title>
+</head>
+<body>
+<main class="container mt-5">
 
-<p>API method used:
-    <a target='_blank' href="https://developers.docusign.com/docs/esign-rest-api/reference/envelopes/envelopes/create/">Envelopes::create</a>.
-</p>
+     <h4>Hourly Rental Agreement</h4>
+     <form method="post" action="">
+         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+         <table>
+             <tr>
+                 <td class="pe-2"><label for="ds-date-of-rental">Date of Rental:</label></td>
+                 <td><input type="text" class="form-control" name="date_of_rental" id="ds-date-of-rental" value="2022-03-08" required /></td>
+             </tr>
+             <tr>
+                 <td class="pe-2"><label for="ds-time-slot-of-rental">Time Slot of Rental:</label></td>
+                 <td><input type="text" class="form-control" name="time_slot_of_rental" id="ds-time-slot-of-rental" value="10am-12pm" required /></td>
+             </tr>
+             <tr>
+                 <td class="pe-2"><label for="ds-total-due">Total Due:</label></td>
+                 <td><input type="text" class="form-control" name="total_due" id="ds-total-due" value="130" required /></td>
+             </tr>
+             <tr>
+                 <td class="pe-2"><label for="ds-retainer-fee-due">Retainer Fee Due:</label></td>
+                 <td><input type="text" class="form-control" name="retainer_fee_due" id="ds-retainer-fee-due" value="Paid $50 for previous rental retainer which is applied to this rental." required /></td>
+             </tr>
+             <tr>
+                 <td class="pe-2"><label for="ds-doc-date">Document date:</label></td>
+                 <td><input type="text" class="form-control" name="doc_date" id="ds-doc-date" placeholder="Today" value="Today" /></td>
+             </tr>
+             <tr>
+                 <td class="pe-2"><label for="ds-renter-name">Renter Name:</label></td>
+                 <td><input type="text" class="form-control" name="signer_name" id="ds-renter-name" value="Lexa Kuznietsov" required /></td>
+             </tr>
+             <tr>
+                 <td class="pe-2"><label for="ds-renter-email">Renter Email:</label></td>
+                 <td><input type="text" class="form-control" name="signer_email" id="ds-renter-email" value="utilmind@gmail.com" required /></td>
+             </tr>
 
-<p>
-    View source file <a target="_blank" href="{{ source_url | raw }}">{{ source_file }}</a> on GitHub.
-</p>
+             <tr>
+                 <td class="pe-2"><label for="ds-cc-name">Renter Name:</label></td>
+                 <td><input type="text" class="form-control" name="cc_name" id="ds-cc-name" value="Oleksiy K" required /></td>
+             </tr>
+             <tr>
+                 <td class="pe-2"><label for="ds-cc-email">Renter Email:</label></td>
+                 <td><input type="text" class="form-control" name="cc_email" id="ds-cc-email" value="aleksey@favor.com.ua" required /></td>
+             </tr>
 
-<form class="eg" action="" method="post" data-busy="form">
-    <div class="form-group">
-        <label for="signer_email">Signer Email</label>
-        <input type="email" class="form-control" id="signer_email" name="signer_email"
-               aria-describedby="emailHelp" placeholder="pat@example.com" required
-               value="{{ signer_email }}">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
-    <div class="form-group">
-        <label for="signer_name">Signer Name</label>
-        <input type="text" class="form-control" id="signer_name" placeholder="Pat Johnson" name="signer_name"
-               value="{{ signer_name }}" required>
-    </div>
-    <div class="form-group">
-        <label for="cc_email">CC Email</label>
-        <input type="email" class="form-control" id="cc_email" name="cc_email" value="aleksey@favor.com.ua"
-               aria-describedby="emailHelp" placeholder="pat@example.com" required >
-        <small id="emailHelpCC" class="form-text text-muted">The email for the cc recipient must be different from the signer's email.</small>
-    </div>
-    <div class="form-group">
-        <label for="cc_name">CC Name</label>
-        <input type="text" class="form-control" id="cc_name" placeholder="Pat Johnson" name="cc_name" value="Lexa Kuznietsov"
-               required >
-    </div>
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-    <button type="submit" class="btn btn-docu">Submit</button>
-</form>
+             <tr>
+                 <td></td>
+                 <td><button type="submit" class="btn btn-primary mt-3">Fill the Template</button></td>
+             </tr>
+         </table>
+     </form>
 
-{% endblock %}
+</main>
+</body>
