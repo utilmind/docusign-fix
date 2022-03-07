@@ -98,7 +98,7 @@ class aktestService
 */
         $document2 = new Document([  # create the DocuSign document object
             'document_base64' => $doc2_b64,
-            'name' => 'Hourly Rental Agreement',  # can be different from actual file name
+            'name' => 'Battle Plan',  # can be different from actual file name
             'file_extension' => 'docx',  # many different document types are accepted
             'document_id' => '2'  # a label used to reference the doc
         ]);
@@ -169,13 +169,12 @@ class aktestService
             'anchor_y_offset' => 10, 'anchor_x_offset' => 20
         ]);
 
-        // Editable fields (unlocked)
         $text_renter_name = new Text([
             'anchor_string' => '/ds-renter-name/', 'anchor_units' => 'pixels',
             'anchor_y_offset' => -7, 'anchor_x_offset' => 3,
             'font' => 'Helvetica', 'font_size' => 'size11',
             'bold' => true, 'value' => $_POST['signer_name'],
-            'locked' => false, 'tab_id' => 'renter_name',
+            'locked' => true, 'tab_id' => 'renter_name',
             'tab_label' => 'Renter Name']);
 
         $text_renter_email = new Text([
@@ -183,7 +182,7 @@ class aktestService
             'anchor_y_offset' => -7, 'anchor_x_offset' => 3,
             'font' => 'Helvetica', 'font_size' => 'size11',
             'bold' => true, 'value' => $_POST['signer_email'],
-            'locked' => false, 'tab_id' => 'renter_email',
+            'locked' => true, 'tab_id' => 'renter_email',
             'tab_label' => 'Renter Email']);
 
         $text_document_date = new Text([
@@ -191,11 +190,9 @@ class aktestService
             'anchor_y_offset' => -7, 'anchor_x_offset' => 3,
             'font' => 'Helvetica', 'font_size' => 'size11',
             'bold' => true, 'value' => $_POST['doc_date'],
-            'locked' => false, 'tab_id' => 'doc_date',
+            'locked' => true, 'tab_id' => 'doc_date',
             'tab_label' => 'Date of Rental']);
 
-
-        // Locked fields
         $text_date_of_rental = new Text([
             'anchor_string' => '/ds-date-of-rental/', 'anchor_units' => 'pixels',
             'anchor_y_offset' => -7, 'anchor_x_offset' => 3,
@@ -223,13 +220,10 @@ class aktestService
         $text_retainer_fee_due = new Text([
             'anchor_string' => '/ds-retainer-fee-due/', 'anchor_units' => 'pixels',
             'anchor_y_offset' => -7, 'anchor_x_offset' => 3,
-            'width' => 440,
-            'height' => 40, // AK multiline
             'font' => 'Helvetica', 'font_size' => 'size11',
             'bold' => true, 'value' => $_POST['retainer_fee_due'],
             'locked' => true, 'tab_id' => 'retainer_fee_due',
             'tab_label' => 'Retainer Fee Due']);
-
 
         $signer1->settabs(new Tabs([
             'sign_here_tabs' => [$sign_here],
