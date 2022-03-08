@@ -4,8 +4,8 @@
 // DocuSign configuration settings
 $DS_CONFIG = [
     'quickstart' => 'true',
-    'ds_client_id' => '27914a06-d727-4b4c-a288-99107b1925da',  // The app's DocuSign integration key
-    'ds_client_secret' => '755979ab-aa9e-4e82-af2b-47b52d9b5468', // The app's DocuSign integration key's secret
+    'ds_client_id' => 'db69fa58-6093-4371-beef-34133a009a34',  // The app's DocuSign integration key
+    'ds_client_secret' => '787c9600-b2aa-4628-964a-adb9413c6e4c', // The app's DocuSign integration key's secret
     'signer_email' => 'utilmind@gmail.com',
     'signer_name' => 'Oleksii Kuznietsov',
     'app_url' => 'http://utilmind/demos/2022/docusign-fix/public', // The url of the application.
@@ -31,7 +31,7 @@ $DS_CONFIG = [
 ];
 
 $JWT_CONFIG = [
-    'ds_client_id' => '27914a06-d727-4b4c-a288-99107b1925da', // The app's DocuSign integration key
+    'ds_client_id' => 'db69fa58-6093-4371-beef-34133a009a34', // The app's DocuSign integration key
     'authorization_server' => 'account-d.docusign.com',
     "ds_impersonated_user_id" => 'b8de6095-76cc-426e-a8ff-1d0718a409ff',  // the id of the user
     "private_key_file" => __DIR__."/private.key", // path to private key file
