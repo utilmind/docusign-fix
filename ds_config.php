@@ -8,7 +8,7 @@ $DS_CONFIG = [
     'ds_client_secret' => '755979ab-aa9e-4e82-af2b-47b52d9b5468', // The app's DocuSign integration key's secret
     'signer_email' => 'utilmind@gmail.com',
     'signer_name' => 'Oleksii Kuznietsov',
-    'app_url' => 'http://utilmind/demos/2022/hr/public', // The url of the application.
+    'app_url' => 'http://utilmind/demos/2022/docusign-fix/public', // The url of the application.
     // Ie, the user enters  app_url in their browser to bring up the app's home page
     // Eg http://localhost/code-examples-php/public (no trailing slash) if the app is installed in a
     // development directory that is accessible via web server.
