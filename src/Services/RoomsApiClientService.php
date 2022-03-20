@@ -39,6 +39,8 @@ class RoomsApiClientService
         # Step 2 start
         # Exceptions will be caught by the calling function
         $config = new Configuration();
+        if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] !== 'on') // AK
+            $config->setSSLVerification(false); // AK: local tests. TODO: use it only if redirect url starts from http:// instead of https://.
         $config->setHost('https://demo.rooms.docusign.com/restapi');
         $config->addDefaultHeader('Authorization', 'Bearer ' . $args['ds_access_token']);
         $this->apiClient = new ApiClient($config);

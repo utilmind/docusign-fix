@@ -41,6 +41,8 @@ class AdminApiClientService
 
         # step 2 start
         $config = new Configuration();
+        if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] !== 'on') // AK
+            $config->setSSLVerification(false); // AK: local tests. TODO: use it only if redirect url starts from http:// instead of https://.
         $config->setAccessToken($accessToken);
         $config->setHost('https://api-d.docusign.net/management');
         $config->addDefaultHeader('Authorization', 'Bearer ' . $accessToken);  
@@ -112,12 +114,19 @@ class AdminApiClientService
        // It is possible for an account to belong to multiple organizations 
        // We are returning the first Organization Id found
        $AccountsApi = new AccountsApi($this->apiClient);
-       $orgs = $AccountsApi->getOrganizations(); // AK: it doesn't returns an error!!
-       if ($orgs["organizations"] == null)
-         throw new ApiException ("You must create an organization for this account to use the DocuSign Admin API. For details, see <a target='_blank' href='https://support.docusign.com/guides/org-admin-guide'> this support article.</a>", 1);
-       else
-         return $orgs["organizations"][0]["id"];
-        
+       try { // AK
+           $orgs = $AccountsApi->getOrganizations(); // AK: it doesn't returns an error!!
+       }catch (ApiException $e) {
+           $error = $e->getMessage(); // AK: get error gracefully to pass it into new exception
+       }
+
+       if (isset($error)) // AK
+           throw new ApiException($error, 1); // AK
+
+       if (!$orgs['organizations']) // AK
+           throw new ApiException ("You must create an organization for this account to use the DocuSign Admin API. For details, see <a target='_blank' href='https://support.docusign.com/guides/org-admin-guide'> this support article.</a>", 1);
+
+       return $orgs["organizations"][0]["id"];
     }
     
     /**

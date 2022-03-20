@@ -32,6 +32,8 @@ class ClickApiClientService
 
         # Step 2 Start
         $config = new Configuration();
+        if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] !== 'on') // AK
+            $config->setSSLVerification(false); // AK: local tests. TODO: use it only if redirect url starts from http:// instead of https://.
         $config->setHost('https://demo.docusign.net/clickapi');
         $config->addDefaultHeader('Authorization', 'Bearer ' . $args['ds_access_token']);
         $this->apiClient = new ApiClient($config);

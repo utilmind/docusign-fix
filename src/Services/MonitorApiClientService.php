@@ -30,6 +30,8 @@ class MonitorApiClientService
         # Exceptions will be caught by the calling function
         # step 2 start
         $config = new Configuration();
+        if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] !== 'on') // AK
+            $config->setSSLVerification(false); // AK: local tests. TODO: use it only if redirect url starts from http:// instead of https://.
         $accessToken = $args['ds_access_token'];
 
         $config->setAccessToken($accessToken);
