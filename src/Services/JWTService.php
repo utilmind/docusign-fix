@@ -87,7 +87,7 @@ class JWTService
         } catch (Throwable $th) {
             // we found consent_required in the response body meaning first time consent is needed
             if (strpos($th->getMessage(), "consent_required") !== false) {
-                $authorizationURL = 'https://account-d.docusign.com/oauth/auth?' . http_build_query(
+                $authorizationURL = 'https://'. $GLOBALS['JWT_CONFIG']['authorization_server'] .'/oauth/auth?' . http_build_query( // AK
                     [
                         'scope' => "impersonation+" . $jwt_scope,
                         'redirect_uri' => $GLOBALS['DS_CONFIG']['app_url'] . '/index.php?page=ds_callback',
@@ -97,7 +97,11 @@ class JWTService
                     ]
                 );
                 header('Location: ' . $authorizationURL);
+                exit;
             }
+
+            echo $th->getMessage(); // AK
+            exit;
         }
     }
 

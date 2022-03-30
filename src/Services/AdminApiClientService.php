@@ -118,6 +118,7 @@ class AdminApiClientService
            $orgs = $AccountsApi->getOrganizations(); // AK: it doesn't returns an error!!
        }catch (ApiException $e) {
            $error = $e->getMessage(); // AK: get error gracefully to pass it into new exception
+           echo "ERROR: Unable to receive organizations.<br />\n". $error;
        }
 
        if (isset($error)) // AK
